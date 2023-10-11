@@ -84,9 +84,12 @@ public class CreditAccountTest {
     @Test // не прошел
     public void testCreditLimitWithNegativeValues() {// проверка что кредитный лимит не может быть отрицательным
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> {new CreditAccount(0, -5_0000, 15);}
+                () -> {
+                    new CreditAccount(0, -5_0000, 15);
+                }
         );
     }
+    
     @Test // не прошел
     public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
         CreditAccount account = new CreditAccount(
@@ -101,7 +104,9 @@ public class CreditAccountTest {
     @Test
     public void testRateWithNegativeValues() {// проверка ставка кредитования не может быть отрицательной
         Assertions.assertThrows(IllegalArgumentException.class,
-                () -> {new CreditAccount(0, 5_0000, -15);}
+                () -> {
+                    new CreditAccount(0, 5_0000, -15);
+                }
         );
     }
 
