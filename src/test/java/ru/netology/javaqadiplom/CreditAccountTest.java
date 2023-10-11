@@ -83,13 +83,9 @@ public class CreditAccountTest {
 
     @Test // не прошел
     public void testCreditLimitWithNegativeValues() {// проверка что кредитный лимит не может быть отрицательным
-        CreditAccount account = new CreditAccount(
-                0,
-                -5_000,
-                15
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> {new CreditAccount(0, -5_0000, 15);}
         );
-
-        Assertions.assertEquals(0, account.getCreditLimit());
     }
     @Test // не прошел
     public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
