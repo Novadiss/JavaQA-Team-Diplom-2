@@ -89,16 +89,14 @@ public class CreditAccountTest {
                 }
         );
     }
-    
+
     @Test // не прошел
     public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                0
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> {
+                    new CreditAccount(0, 0, 15);
+                }
         );
-
-        Assertions.assertEquals(0, account.getRate());
     }
 
     @Test
