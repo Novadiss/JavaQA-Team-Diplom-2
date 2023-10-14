@@ -328,7 +328,7 @@ public class SavingAccountTest {
     }
 
     @Test // ok
-    public void shouldYearChange(){
+    public void shouldYearChange() {
         SavingAccount account = new SavingAccount(
                 2_000,
                 1_000,
