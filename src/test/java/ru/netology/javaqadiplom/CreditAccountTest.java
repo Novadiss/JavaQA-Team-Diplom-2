@@ -44,7 +44,7 @@ public class CreditAccountTest {
         Assertions.assertEquals(0, account.getBalance());
     }
 
-    @Test // не работает
+    @Test
     public void testInitialBalanceWithPositiveValues() {//пополнение баланса при наличии положительного изначального баланса и нормальных значениях кредитного лимита и рейтинга
         CreditAccount account = new CreditAccount(
                 1000,
@@ -81,7 +81,7 @@ public class CreditAccountTest {
         Assertions.assertEquals(0, account.getCreditLimit());
     }
 
-    @Test 
+    @Test
     public void testCreditLimitWithNegativeValues() {// проверка что кредитный лимит не может быть отрицательным
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
