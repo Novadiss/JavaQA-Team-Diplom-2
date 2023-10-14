@@ -30,7 +30,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test // не прошел
+    @Test // ok
     public void shouldThrowExceptionIfMinBalanceMoreMaxBalance() { // выброс исключения, если минимальный баланс больше максимального
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -41,7 +41,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldThrowExceptionIfBalanceMoreMaxBalance() { // выброс исключения, если начальный баланс больше максимального
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -52,7 +52,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldThrowExceptionIfBalanceLessMinBalance() { // выброс исключения, если начальный баланс меньше минимального
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -87,7 +87,7 @@ public class SavingAccountTest {
         Assertions.assertEquals(8_000 - 7_000, account.getBalance());
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldNotPayLessThanMinBalance() { // баланс не должен измениться, т.к. он может стать меньше минимального
         SavingAccount account = new SavingAccount(
                 8_000,
@@ -99,7 +99,7 @@ public class SavingAccountTest {
         Assertions.assertEquals(8_000, account.getBalance());
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldNotPayLessThanZero() { // баланс не должен измениться, т.к. он может стать отрицательным
         SavingAccount account = new SavingAccount(
                 8_000,
@@ -147,7 +147,7 @@ public class SavingAccountTest {
         Assertions.assertTrue(actual);
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldTrueIfPayToMinBalance() { // должен вернуть true,если платеж успешный
         SavingAccount account = new SavingAccount(
                 8_000,
@@ -207,7 +207,7 @@ public class SavingAccountTest {
         Assertions.assertFalse(actual);
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldAddLessThanMaxBalance() { // баланс должен увеличиться на сумму пополнения, но не больше максимального
         SavingAccount account = new SavingAccount(
                 2_000,
@@ -219,7 +219,7 @@ public class SavingAccountTest {
         Assertions.assertEquals(2_000 + 3_000, account.getBalance());
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldAddToMaxBalance() { // баланс должен увеличиться на сумму пополнения и стать равным максимальному
         SavingAccount account = new SavingAccount(
                 2_000,
