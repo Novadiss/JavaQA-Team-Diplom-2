@@ -90,7 +90,7 @@ public class CreditAccountTest {
         );
     }
 
-    @Test // не прошел
+    @Test
     public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
