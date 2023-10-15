@@ -5,71 +5,36 @@ import org.junit.jupiter.api.Test;
 
 public class CreditAccountTest {
 
-    @Test
-    public void shouldAddToPositiveBalance() { //пополнение баланса при пустом изначальном балансе и нормальных значениях кредитного лимита и рейтинга
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.add(3_000);
-
-        Assertions.assertEquals(3_000, account.getBalance());
-    }
-
-    @Test
-    public void shouldAddToNegativeBalance() {//пополнение баланса на отрицательное значение при пустом изначальном балансе и нормальных значениях кредитного лимита и рейтинга
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.add(-30_000);
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
-    public void shouldAddToZeroBalance() {//пополнение баланса на нулевое значение при пустом изначальном балансе и нормальных значениях кредитного лимита и рейтинга
-        CreditAccount account = new CreditAccount(
-                0,
-                5_000,
-                15
-        );
-
-        account.add(0);
-
-        Assertions.assertEquals(0, account.getBalance());
-    }
-
-    @Test
-    public void testInitialBalanceWithPositiveValues() {//пополнение баланса при наличии положительного изначального баланса и нормальных значениях кредитного лимита и рейтинга
-        CreditAccount account = new CreditAccount(
-                1000,
-                5_000,
-                15
-        );
-
-        account.add(3_000);
-
-        Assertions.assertEquals(4_000, account.getBalance());
-    }
-
-    /*@Test
+    @Test //не прошел
     public void testInitialBalanceWithNegativeValues() {// проверка что отрицательный изначальный баланс быть не может
+        Assertions.assertThrows(IllegalArgumentException.class,
+                () -> {
+                    new CreditAccount(-1_000, 5_0000, 15);
+                }
+        );
+    }
+
+    @Test
+    public void testInitialBalanceWithZeroValues() { //проверка что нулевой изначальный баланс возможен
         CreditAccount account = new CreditAccount(
-                -10000,
+                0,
                 5_000,
                 15
         );
 
-        account.add(3_000);
+        Assertions.assertEquals(0, account.getBalance());
+    }
 
-        Assertions.assertEquals(3000, account.getBalance());
-    }*/
+    @Test
+    public void testInitialBalanceWithPositiveValues() { //проверка что изначальный баланс больше нуля возможен
+        CreditAccount account = new CreditAccount(
+                1_000,
+                5_000,
+                15
+        );
 
+        Assertions.assertEquals(1_000, account.getBalance());
+    }
 
     @Test
     public void testCreditLimitWithNegativeValues() {// проверка что кредитный лимит не может быть отрицательным
@@ -80,13 +45,26 @@ public class CreditAccountTest {
         );
     }
 
-    @Test
-    public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
-        Assertions.assertThrows(IllegalArgumentException.class,
-                () -> {
-                    new CreditAccount(0, 0, 15);
-                }
+    @Test // не прошел
+    public void testCreditLimitWithZeroValues() {// проверка что кредитный лимит может быть равен 0
+        CreditAccount account = new CreditAccount(
+                1_000,
+                0,
+                15
         );
+
+        Assertions.assertEquals(0, account.getCreditLimit());
+    }
+
+    @Test
+    public void testCreditLimitWithPositiveValues() {// проверка что кредитный лимит может быть положительным
+        CreditAccount account = new CreditAccount(
+                1_000,
+                1_000,
+                15
+        );
+
+        Assertions.assertEquals(1_000, account.getCreditLimit());
     }
 
     @Test
@@ -96,6 +74,28 @@ public class CreditAccountTest {
                     new CreditAccount(0, 5_0000, -15);
                 }
         );
+    }
+
+    @Test //не прошел
+    public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
+        CreditAccount account = new CreditAccount(
+                1_000,
+                1_000,
+                0
+        );
+
+        Assertions.assertEquals(0, account.getRate());
+    }
+
+    @Test
+    public void testRateWithPositiveValues() {// проверка что cтавка кредитования может быть положительной
+        CreditAccount account = new CreditAccount(
+                1_000,
+                1_000,
+                15
+        );
+
+        Assertions.assertEquals(15, account.getRate());
     }
 
     @Test
@@ -112,29 +112,94 @@ public class CreditAccountTest {
     }
 
     @Test
-    public void shouldNegativePay() { //проверка отрицательного платежа 
+    public void shouldZeroPay() { //проверка что нулевой платеж невозможен с нормальными исходными данными
         CreditAccount account = new CreditAccount(
                 5_000,
                 5_000,
                 15
         );
 
-        account.pay(-3_000);
+        boolean actual = account.pay(0);
 
-        Assertions.assertEquals(5_000, account.getBalance());
+        Assertions.assertFalse(actual);
     }
 
     @Test
-    public void shouldPayMoreThenCreditLimit() { //проверка платежа больше кредитного лимита
+    public void shouldNegativePay() { //проверка что отрицательный платеж невозможен с нормальными исходными данными
+        CreditAccount account = new CreditAccount(
+                5_000,
+                5_000,
+                15
+        );
+
+        boolean actual = account.pay(-3_000);
+
+        Assertions.assertFalse(actual);
+    }
+
+    @Test
+    public void shouldPayMoreThenCreditLimit() { //проверка что платеж за пределы кредитного лимита невозможен
         CreditAccount account = new CreditAccount(
                 2_000,
                 500,
                 15
         );
 
-        account.pay(3_000);
+        boolean actual = account.pay(3_000);
 
-        Assertions.assertEquals(2_000, account.getBalance());
+        Assertions.assertFalse(actual);
+    }
+
+    @Test
+    public void shouldAddToPositiveBalance() { //пополнение баланса при пустом изначальном балансе и нормальных значениях кредитного лимита и рейтинга
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                15
+        );
+
+        account.add(3_000);
+
+        Assertions.assertEquals(3_000, account.getBalance());
+    }
+
+    @Test
+    public void shouldAddToNegativeBalance() {//Проверка что пополнение на отрицательное значение невозможно
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                15
+        );
+
+        boolean actual = account.add(-30_000);
+
+        Assertions.assertFalse(actual);
+    }
+
+    @Test
+    public void shouldAddToZeroBalance() {//Проверка что пополнение на нулевое значение невозможно
+        CreditAccount account = new CreditAccount(
+                0,
+                5_000,
+                15
+        );
+
+        boolean actual = account.add(0);
+
+        Assertions.assertFalse(actual);
+    }
+
+    @Test
+    public void testBalanceWithPositiveValues() {//пополнение баланса при наличии положительного изначального баланса и нормальных значениях кредитного лимита и рейтинга
+        CreditAccount account = new CreditAccount(
+                1000,
+                5_000,
+                15
+        );
+
+        account.add(3_000);
+
+        Assertions.assertEquals(4_000, account.getBalance());
     }
 
     @Test
