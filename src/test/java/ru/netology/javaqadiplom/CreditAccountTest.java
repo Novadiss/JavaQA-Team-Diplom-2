@@ -235,8 +235,7 @@ public class CreditAccountTest {
                 500,
                 15
         );
-
-
+        
         Assertions.assertEquals(0, account.yearChange());
     }
 }
