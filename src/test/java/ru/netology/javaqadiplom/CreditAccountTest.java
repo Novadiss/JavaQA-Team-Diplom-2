@@ -108,7 +108,7 @@ public class CreditAccountTest {
         );
     }
 
-    @Test //не прошел
+    @Test
     public void shouldPayPositiveBalance() { //проверка платежа с нормальными исходными данными
         CreditAccount account = new CreditAccount(
                 5_000,
@@ -134,7 +134,7 @@ public class CreditAccountTest {
         Assertions.assertEquals(5_000, account.getBalance());
     }
 
-    @Test //не прошел
+    @Test
     public void shouldPayMoreThenCreditLimit() { //проверка платежа больше кредитного лимита
         CreditAccount account = new CreditAccount(
                 2_000,
