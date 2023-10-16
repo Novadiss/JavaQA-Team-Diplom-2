@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class CreditAccountTest {
 
-    @Test //не прошел
+    @Test
     public void testInitialBalanceWithNegativeValues() {// проверка что отрицательный изначальный баланс быть не может
         Assertions.assertThrows(IllegalArgumentException.class,
                 () -> {
@@ -235,7 +235,7 @@ public class CreditAccountTest {
                 500,
                 15
         );
-        
+
         Assertions.assertEquals(0, account.yearChange());
     }
 }
