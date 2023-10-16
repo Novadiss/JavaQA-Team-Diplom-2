@@ -63,7 +63,7 @@ public class SavingAccountTest {
         });
     }
 
-    @Test // не прошел
+    @Test // ок
     public void shouldThrowExceptionIfMinBalanceNegative() { // выброс исключения, если минимальный баланс отрицательный
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
             SavingAccount account = new SavingAccount(
@@ -290,7 +290,7 @@ public class SavingAccountTest {
         Assertions.assertTrue(actual);
     }
 
-    @Test // не прошед
+    @Test // ок
     public void shouldTrueIfAddToMaxBalance() { // должен вернуть true когда пополнение прошло успешно
         SavingAccount account = new SavingAccount(
                 2_000,
