@@ -63,6 +63,17 @@ public class SavingAccountTest {
         });
     }
 
+    @Test // не прошел
+    public void shouldThrowExceptionIfMinBalanceNegative() { // выброс исключения, если минимальный баланс отрицательный
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            SavingAccount account = new SavingAccount(
+                    1_000,
+                    -1_000,
+                    15_000,
+                    3);
+        });
+    }
+
     @Test // ok
     public void shouldPayAboveMinBalance() { // баланс должен уменьшиться на сумму покупки, но остаться выше мин. баланса
         SavingAccount account = new SavingAccount(
@@ -337,6 +348,20 @@ public class SavingAccountTest {
         );
 
         int expected = 100;
+        int actual = account.yearChange();
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test // ok
+    public void shouldYearChangeIfRateZero() {
+        SavingAccount account = new SavingAccount(
+                2_000,
+                1_000,
+                10_000,
+                0
+        );
+
+        int expected = 0;
         int actual = account.yearChange();
         Assertions.assertEquals(expected, actual);
     }
