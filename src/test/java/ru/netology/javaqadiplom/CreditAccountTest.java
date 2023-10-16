@@ -76,7 +76,7 @@ public class CreditAccountTest {
         );
     }
 
-    @Test //не прошел
+    @Test
     public void testRateWithZeroValues() {// проверка ставка кредитования может быть равна 0
         CreditAccount account = new CreditAccount(
                 1_000,
