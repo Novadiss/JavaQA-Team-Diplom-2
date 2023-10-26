@@ -365,4 +365,17 @@ public class SavingAccountTest {
         int actual = account.yearChange();
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void shouldYearChangeIfBalanceLess100() {
+        SavingAccount account = new SavingAccount(
+                80,
+                0,
+                10_000,
+                5
+        );
+        int expected = 4;
+        int actual = account.yearChange();
+        Assertions.assertEquals(expected, actual);
+    }
 }
