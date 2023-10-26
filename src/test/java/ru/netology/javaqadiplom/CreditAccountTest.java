@@ -239,7 +239,7 @@ public class CreditAccountTest {
         Assertions.assertEquals(0, account.yearChange());
     }
 
-    @Test // не прошел
+    @Test 
     public void shouldYearChangeIfBalanceNotMultipleOf100() { //Проверка начисления процентов при балансе не кратном 100
         CreditAccount account = new CreditAccount(
                 0,
