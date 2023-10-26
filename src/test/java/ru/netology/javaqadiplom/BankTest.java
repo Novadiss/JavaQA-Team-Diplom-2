@@ -112,4 +112,38 @@ public class BankTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testTransferWhenRefillNotWorkForRecipient() { //проверка что при несработавшем пополнении баланс получателя не изменится
+        Bank temp = new Bank();
+        SavingAccount savingAccount2 = new SavingAccount(
+                2_000,
+                0,
+                3_000,
+                5
+        );
+        temp.transfer(savingAccount1, savingAccount2, 2_000);
+
+        int expected = 2_000;
+        int actual = savingAccount2.getBalance();
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testTransferWhenRefillNotWorkForSender() { //проверка что при несработавшем пополнении баланс отправителя не изменится
+        Bank temp = new Bank();
+        SavingAccount savingAccount2 = new SavingAccount(
+                2_000,
+                0,
+                3_000,
+                5
+        );
+        temp.transfer(savingAccount1, savingAccount2, 2_000);
+
+        int expected = 2_000;
+        int actual = savingAccount1.getBalance();
+
+        Assertions.assertEquals(expected, actual);
+    }
 }
