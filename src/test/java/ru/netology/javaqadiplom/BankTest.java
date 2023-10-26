@@ -87,7 +87,7 @@ public class BankTest {
     }
 
     @Test
-    public void shouldNotChangeIfAmountMoreThanCreditLimit() { //  счета не изменится если платеж больше текущего баланса
+    public void shouldNotChangeIfAmountMoreThanCreditLimit() { //  счета не изменятся если платеж больше текущего баланса
 
         bank.transfer(credit, saving, 17_000);
 
@@ -102,4 +102,20 @@ public class BankTest {
         Assertions.assertFalse(actual);
     }
 
+    @Test
+    public void shouldNotChangeIfAmountMoreThanMaxBalance() { //  счета не изменятся если платеж больше макс.баланса сбер. счета
+
+        bank.transfer(credit, saving, 11_000);
+
+        Assertions.assertEquals(6_000, credit.getBalance());
+        Assertions.assertEquals(5_000, saving.getBalance());
+
+    }
+
+    @Test
+    public void shouldFalseIfAmountMoreThanMaxBalance() { //  должен вернуться false если платеж больше макс.баланса сбер. счета
+
+        boolean actual = bank.transfer(credit, saving, 11_000);
+        Assertions.assertFalse(actual);
+    }
 }
