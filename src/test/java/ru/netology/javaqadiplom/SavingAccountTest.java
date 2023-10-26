@@ -366,7 +366,7 @@ public class SavingAccountTest {
         Assertions.assertEquals(expected, actual);
     }
 
-    @Test // не прошел
+    @Test
     public void shouldYearChangeIfBalanceLess100() {
         SavingAccount account = new SavingAccount(
                 80,
