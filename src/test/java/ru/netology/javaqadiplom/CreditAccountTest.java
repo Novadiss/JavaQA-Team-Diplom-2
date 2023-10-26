@@ -238,4 +238,18 @@ public class CreditAccountTest {
 
         Assertions.assertEquals(0, account.yearChange());
     }
+
+    @Test // не прошел
+    public void shouldYearChangeIfBalanceNotMultipleOf100() { //Проверка начисления процентов при балансе не кратном 100
+        CreditAccount account = new CreditAccount(
+                0,
+                500,
+                15
+        );
+
+        account.pay(160);
+        int expected = -24;
+        int actual = account.yearChange();
+        Assertions.assertEquals(expected, actual);
+    }
 }
