@@ -20,9 +20,13 @@ public class Bank {
         }
         if (from.pay(amount)) {
             if (!to.add(amount)) {
-                return (from.add(amount));
+                from.add(amount);
+                return false;
+            } else {
+                return true;
             }
+        } else {
+            return false;
         }
-        return true;
     }
 }

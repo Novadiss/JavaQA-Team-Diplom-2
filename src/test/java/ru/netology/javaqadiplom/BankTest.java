@@ -146,4 +146,26 @@ public class BankTest {
 
         Assertions.assertEquals(expected, actual);
     }
+
+    @Test
+    public void testTransferBooleanFalse() { //проверка что при отказе трансфера возвращается false
+        Bank temp = new Bank();
+        SavingAccount savingAccount2 = new SavingAccount(
+                2_000,
+                0,
+                3_000,
+                5
+        );
+
+        boolean actual = temp.transfer(savingAccount1, savingAccount2, 2_000);
+        Assertions.assertFalse(actual);
+    }
+
+    @Test
+    public void testTransferBooleanTrue() { //проверка что при прошедшем трансфере возвращается true
+        Bank temp = new Bank();
+
+        boolean actual = temp.transfer(savingAccount1, savingAccount2, 2_000);
+        Assertions.assertTrue(actual);
+    }
 }
